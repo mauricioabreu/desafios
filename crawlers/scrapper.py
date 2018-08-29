@@ -4,12 +4,10 @@ from lxml import html
 import requests
 
 
-def find_threads(subreddit, site="https://old.reddit.com"):
-    page = read_html_page(site, subreddit)
-
+def find_threads(tree, site):
     awesome_threads = []
 
-    threads = page.xpath(f"//div[@id = 'siteTable']/div[contains(@class, 'thing')]")
+    threads = tree.xpath(f"//div[@id = 'siteTable']/div[contains(@class, 'thing')]")
 
     for thread in threads:
         awesome_threads.append(
@@ -67,10 +65,5 @@ def find_comments_link(thread):
     return comments_link.get("href")
 
 
-def read_html_page(site, subreddit):
-    response = requests.get(
-        "/r/".join([site, subreddit]),
-        allow_redirects=True,
-        headers={"User-Agent": "most-awesome-threads 0.1"},
-    )
-    return html.fromstring(response.content)
+def tree_from_buffer(content):
+    return html.fromstring(content)
