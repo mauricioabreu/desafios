@@ -6,7 +6,7 @@ import scrapper
 def find_awesome_threads(subreddits, site="https://old.reddit.com", minimum_votes=5000):
     """Find the trending threads of reddit.
 
-    A `trending` thread is identified by the total of votes, 
+    A `trending` thread is identified by the total of votes,
     the difference of likes and dislikes.
     """
     subreddits_threads = {}
