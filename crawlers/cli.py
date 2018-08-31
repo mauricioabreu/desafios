@@ -11,7 +11,7 @@ Usage:
 
 import argparse
 
-import api
+from crawler import api
 
 parser = argparse.ArgumentParser(description="Find some amazing reddit threads")
 parser.add_argument(

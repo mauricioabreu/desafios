@@ -1,7 +1,7 @@
 """Test for the crawler application."""
 import os
 
-from .. import scrapper
+from crawler import scrapper
 
 
 def load_fixture(subreddit):

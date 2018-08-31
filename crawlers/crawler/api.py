@@ -1,6 +1,5 @@
 """API to find the most upvoted threads in subreddits."""
-import net
-import scrapper
+from crawler import net, scrapper
 
 
 def find_awesome_threads(subreddits, site="https://old.reddit.com", minimum_votes=5000):
