@@ -1,31 +1,42 @@
-# Desafio 2: Crawlers
+# Crawler
 
-Parte do trabalho na IDwall inclui desenvolver *crawlers/scrapers* para coletar dados de websites.
-Como nós nos divertimos trabalhando, às vezes trabalhamos para nos divertir!
+This is a rediit crawler. It crawls subreddits and its main goal is to gather the most awesome threads - up to 5k votes!
 
-O Reddit é quase como um fórum com milhares de categorias diferentes. Com a sua conta, você pode navegar por assuntos técnicos, ver fotos de gatinhos, discutir questões de filosofia, aprender alguns life hacks e ficar por dentro das notícias do mundo todo!
+If you want to read more about the challenge, read [the challenge](CHALLENGE.md)
 
-Subreddits são como fóruns dentro do Reddit e as postagens são chamadas *threads*.
+## Usage
 
-Para quem gosta de gatos, há o subreddit ["/r/cats"](https://www.reddit.com/r/cats) com threads contendo fotos de gatos fofinhos.
-Para *threads* sobre o Brasil, vale a pena visitar ["/r/brazil"](https://www.reddit.com/r/brazil) ou ainda ["/r/worldnews"](https://www.reddit.com/r/worldnews/).
-Um dos maiores subreddits é o "/r/AskReddit".
+To use this crawler, you can invoke it as a `CLI`, talk to it using the `Telegram bot` or import it and use it as an `API`. The API is the highest surface
+used to build higher level interfaces from it, for example the `CLI` and the `Telegram bot`.
 
-Cada *thread* possui uma pontuação que, simplificando, aumenta com "up votes" (tipo um like) e é reduzida com "down votes".
+Head to the interface you want to use and follow the examples.
 
-Sua missão é encontrar e listar as *threads* que estão bombando no Reddit naquele momento!
-Consideramos como bombando *threads* com 5000 pontos ou mais.
+### API
 
-## Entrada
-- Lista com nomes de subreddits separados por ponto-e-vírgula (`;`). Ex: "askreddit;worldnews;cats"
+Import the API and use the `find_awesome_threads` function to find some amazing threads.
 
-### Parte 1
-Gerar e imprimir uma lista contendo número de upvotes, subreddit, título da thread, link para os comentários da thread, link da thread.
-Essa parte pode ser um CLI simples, desde que a formatação da impressão fique legível.
+```python
+from crawler.api import find_awesome_threads
+subreddits = ["cats", "askreddit", "brazil"]
+awesome_threads = find_awesome_threads(subreddits)
+print(awesome_threads)
+```
 
-### Parte 2
-Construir um robô que nos envie essa lista via Telegram sempre que receber o comando `/NadaPraFazer [+ Lista de subrredits]` (ex.: `/NadaPraFazer programming;dogs;brazil`)
+### CLI
 
-### Dicas
- - Use https://old.reddit.com/
- - Qualquer método para coletar os dados é válido. Caso não saiba por onde começar, procure por JSoup (Java), SeleniumHQ (Java), PhantomJS (Javascript) e Beautiful Soup (Python).
+```console
+$ python cli.py -h
+$ python cli.py "cats;askreddit"
+```
+
+### Telegram bot
+
+Work in progress
+
+## Tests
+
+There is a test suite that guarantee our code works and does not break when we change it.
+
+```console
+make test
+```
