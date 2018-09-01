@@ -31,7 +31,13 @@ $ python cli.py "cats;askreddit"
 
 ### Telegram bot
 
-Work in progress
+To run the bot you need to run the module that starts a long polling process.
+Before running it, you need a Telegram API token.
+
+```console
+$ python bot.py -h
+$ python bot.py <TOKEN>
+```
 
 ## Tests
 
