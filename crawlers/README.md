@@ -39,6 +39,11 @@ $ python bot.py -h
 $ python bot.py <TOKEN>
 ```
 
+After initializing the bot process, you can start talking to the bot. There are two commands available for now:
+
+    /help (shows the availble commands and explain how to use them)
+    /NadaPraFazer <subreddits> (command to keep up to date on Reddit threads)
+
 ## Tests
 
 There is a test suite that guarantee our code works and does not break when we change it.
