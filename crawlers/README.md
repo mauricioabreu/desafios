@@ -4,6 +4,14 @@ This is a rediit crawler. It crawls subreddits and its main goal is to gather th
 
 If you want to read more about the challenge, read [the challenge](CHALLENGE.md)
 
+## Installing
+
+To run this code, you first need to install its dependencies:
+
+```console
+make deps
+```
+
 ## Usage
 
 To use this crawler, you can invoke it as a `CLI`, talk to it using the `Telegram bot` or import it and use it as an `API`. The API is the highest surface
