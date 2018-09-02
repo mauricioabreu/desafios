@@ -8,6 +8,7 @@ def find_threads(tree, site):
     awesome_threads = []
 
     threads = tree.xpath(f"//div[@id = 'siteTable']/div[contains(@class, 'thing')]")
+    next_page = find_next_page(tree)
 
     for thread in threads:
         awesome_threads.append(
@@ -19,7 +20,14 @@ def find_threads(tree, site):
             }
         )
 
-    return awesome_threads
+    return awesome_threads, next_page
+
+
+def find_next_page(tree):
+    try:
+        return tree.xpath("//span/a[contains(@rel, 'next')]/@href")[0]
+    except ValueError:
+        return None
 
 
 def format_upvotes(upvotes):
@@ -60,7 +68,7 @@ def find_title(thread):
 
 def find_comments_link(thread):
     comments_link = thread.xpath(
-        "div[@class='entry unvoted']/div[@class='top-matter']/ul[1]/li[1]/a"
+        "div[@class='entry unvoted']/div[@class='top-matter']/ul[1]/li[@class='first']/a"
     )[0]
     return comments_link.get("href")
 

@@ -14,7 +14,7 @@ def load_fixture(subreddit):
 def test_scrap_threads():
     content = load_fixture("cats")
     tree = scrapper.tree_from_buffer(content)
-    threads = scrapper.find_threads(tree, "https://old.reddit.com")
+    threads, _ = scrapper.find_threads(tree, "https://old.reddit.com")
 
     # Ensure we have the same number of threads in the response
     assert len(threads) == 25
