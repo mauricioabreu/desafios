@@ -6,8 +6,8 @@ def find_awesome_threads(
     subreddits,
     site="https://old.reddit.com",
     minimum_votes=5000,
-    max_pages=100,
-    max_threads=100,
+    max_pages=5,
+    max_threads=5,
 ):
     """Find the trending threads of reddit.
 
