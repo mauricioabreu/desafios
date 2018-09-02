@@ -1,7 +1,6 @@
 """Scrap reddit page to find threads."""
 
 from lxml import html
-import requests
 
 
 def find_threads(tree, site):
