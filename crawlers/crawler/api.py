@@ -1,5 +1,5 @@
 """API to find the most upvoted threads in subreddits."""
-from crawler import net, scrapper
+from crawler import formatter, net, scrapper
 
 
 def find_awesome_threads(
@@ -17,18 +17,14 @@ def find_awesome_threads(
     subreddits_threads = {}
     for subreddit in subreddits:
         subreddits_threads[subreddit] = scrap_subreddit_threads(
-            subreddit,
-            "/r/".join([site, subreddit]),
-            minimum_votes,
-            max_pages,
-            max_threads,
+            subreddit, site, minimum_votes, max_pages, max_threads
         )
     return subreddits_threads
 
 
 def scrap_subreddit_threads(subreddit, site, minimum_votes, max_pages, max_threads):
     threads = []
-    page_site = site
+    page_site = "/r/".join([site, subreddit])
 
     total_read_pages = 0
 
@@ -37,7 +33,8 @@ def scrap_subreddit_threads(subreddit, site, minimum_votes, max_pages, max_threa
             break
 
         page = scrapper.tree_from_buffer(net.read_html_page(page_site))
-        page_threads, page_site = scrapper.find_threads(page, site)
+        page_threads, page_site = scrapper.find_threads(page)
+        page_threads = formatter.format_threads(page_threads, site)
         threads.extend(filter_most_voted(page_threads, minimum_votes))
         total_read_pages += 1
 
@@ -51,3 +48,4 @@ def filter_most_voted(threads, minimum_votes):
         if thread["upvotes"] >= minimum_votes:
             most_voted.append(thread)
     return most_voted
+

@@ -3,7 +3,7 @@
 from lxml import html
 
 
-def find_threads(tree, site):
+def find_threads(tree):
     awesome_threads = []
 
     threads = tree.xpath(f"//div[@id = 'siteTable']/div[contains(@class, 'thing')]")
@@ -13,8 +13,8 @@ def find_threads(tree, site):
         awesome_threads.append(
             {
                 "title": find_title(thread),
-                "upvotes": format_upvotes(find_upvotes(thread)),
-                "thread_link": format_link(find_link(thread), site),
+                "upvotes": find_upvotes(thread),
+                "thread_link": find_link(thread),
                 "comments_link": find_comments_link(thread),
             }
         )
@@ -27,19 +27,6 @@ def find_next_page(tree):
         return tree.xpath("//span/a[contains(@rel, 'next')]/@href")[0]
     except IndexError:
         return None
-
-
-def format_upvotes(upvotes):
-    try:
-        return int(upvotes)
-    except ValueError:
-        return 0
-
-
-def format_link(link, site):
-    if not link.startswith("http"):
-        return site + link
-    return link
 
 
 def find_link(thread):
