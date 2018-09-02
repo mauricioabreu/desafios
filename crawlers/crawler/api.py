@@ -6,8 +6,8 @@ def find_awesome_threads(
     subreddits,
     site="https://old.reddit.com",
     minimum_votes=5000,
-    max_pages=5,
-    max_threads=5,
+    max_pages=100,
+    max_threads=100,
 ):
     """Find the trending threads of reddit.
 
@@ -33,6 +33,9 @@ def scrap_subreddit_threads(subreddit, site, minimum_votes, max_pages, max_threa
     total_read_pages = 0
 
     while (len(threads) < max_threads) and (total_read_pages < max_pages):
+        if not page_site:
+            break
+
         page = scrapper.tree_from_buffer(net.read_html_page(page_site))
         page_threads, page_site = scrapper.find_threads(page, site)
         threads.extend(filter_most_voted(page_threads, minimum_votes))

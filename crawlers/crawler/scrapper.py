@@ -26,7 +26,7 @@ def find_threads(tree, site):
 def find_next_page(tree):
     try:
         return tree.xpath("//span/a[contains(@rel, 'next')]/@href")[0]
-    except ValueError:
+    except IndexError:
         return None
 
 
